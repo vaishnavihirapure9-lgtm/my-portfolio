@@ -1,3 +1,69 @@
+document.addEventListener("DOMContentLoaded", function () {
+
+    /* =========================
+       FAQ ACCORDION
+    ========================= */
+
+    const faqQuestions = document.querySelectorAll(".faq-question");
+
+    faqQuestions.forEach(function (question) {
+
+        question.addEventListener("click", function () {
+
+            const faqItem = this.closest(".faq-item");
+            const faqAnswer = faqItem.querySelector(".faq-answer");
+            const icon = this.querySelector("i");
+
+            // Close all other FAQs
+            document.querySelectorAll(".faq-item").forEach(function (item) {
+
+                if (item !== faqItem) {
+                    item.classList.remove("active");
+
+                    const answer = item.querySelector(".faq-answer");
+                    if (answer) {
+                        answer.style.maxHeight = null;
+                    }
+
+                    const otherIcon = item.querySelector(".faq-question i");
+                    if (otherIcon) {
+                        otherIcon.style.transform = "rotate(0deg)";
+                    }
+                }
+
+            });
+
+            // Toggle current FAQ
+            faqItem.classList.toggle("active");
+
+            if (faqItem.classList.contains("active")) {
+
+                faqAnswer.style.maxHeight = faqAnswer.scrollHeight + "px";
+
+                if (icon) {
+                    icon.style.transform = "rotate(45deg)";
+                }
+
+            } else {
+
+                faqAnswer.style.maxHeight = null;
+
+                if (icon) {
+                    icon.style.transform = "rotate(0deg)";
+                }
+
+            }
+
+        });
+
+    });
+
+});
+
+
+
+
+
 /* =========================================================
    PROJECT LOADER
 ========================================================= */
